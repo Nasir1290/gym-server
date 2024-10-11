@@ -56,54 +56,36 @@ const getUserByIdFromDB = async (id: string) => {
     return result;
 };
 
-// const updateProfileToDB = async (user: JwtPayload, payload: Partial<IUser>): Promise<Partial<IUser | null>> => {
-//     const { id } = user;
-// // console.log({payload})
-
-//     if (payload.email) {
-//         throw new ApiError(StatusCodes.FORBIDDEN, 'Email cannot be changed!!!');
-//     }
-//     const isExistUser = await User.isExistUserById(id);
-//     if (!isExistUser) {
-//         throw new ApiError(StatusCodes.BAD_REQUEST, "User doesn't exist!");
-//     }
-
-//     //unlink file here
-//     if (payload.profile) {
-//         unlinkFile(isExistUser.profile);
-//     }
-
-//     const updateDoc = await User.findOneAndUpdate({ _id: id }, payload?.data, {
-//         new: true,
-//     });
-// // console.log(updateDoc)
-//     return updateDoc;
-// };
 
 const updateProfileToDB = async (user: JwtPayload, payload: Partial<IUser>): Promise<Partial<IUser | null>> => {
     const { id } = user;
+    // console.log(typeof payload.profile)
 
-    // Prevent email changes
     if (payload.email) {
         throw new ApiError(StatusCodes.FORBIDDEN, 'Email cannot be changed!!!');
     }
-
-    // Check if the user exists
     const isExistUser = await User.isExistUserById(id);
     if (!isExistUser) {
         throw new ApiError(StatusCodes.BAD_REQUEST, "User doesn't exist!");
     }
 
-    // Unlink old profile if a new one is being uploaded
+    //unlink file here
     if (payload.profile) {
         unlinkFile(isExistUser.profile);
     }
-    console.log(payload);
-    // Update the user profile (correct usage of payload)
-    const updateDoc = await User.findOneAndUpdate({ _id: id }, payload, { new: true });
-    console.log(updateDoc);
+
+    const updateDoc = await User.findOneAndUpdate(
+        { _id: id },
+        { profile: payload?.profile, ...payload?.data },
+        {
+            new: true,
+        },
+    );
+    // console.log(updateDoc)
     return updateDoc;
 };
+
+
 
 const updateUserToDB = async (payload: Partial<IUser>): Promise<Partial<IUser | null>> => {
     console.log(payload);

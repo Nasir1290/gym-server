@@ -69,24 +69,53 @@ const getAllUsers = catchAsync(async (req: Request, res: Response) => {
 });
 
 
+const updateProfile = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    const user = req.user;
+    let profile;
+    console.log(req.files)
+    // Check for file upload
+    if (req.files && 'image' in req.files && req.files.image[0]) {
+        profile = `/images/${req.files.image[0].filename}`;
+    }
+    console.log(req.body)
+    // Create data object for updating the profile
+    const data = {
+        profile,
+        ...req.body,
+    };
+
+    // Log for debugging (remove in production)
+
+    // Update the profile in the database
+    const result = await UserService.updateProfileToDB(user, data);
+
+    // Send the response back
+    sendResponse(res, {
+        success: true,
+        statusCode: StatusCodes.OK,
+        message: 'Profile updated successfully',
+        data: result,
+    });
+});
+
+
+
 // const updateProfile = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-//     const user = req.user;
+//     const user = req.user; // The user object should contain user information
 //     let profile;
 
-//     // Check for file upload
+//     // Check if a new profile image is being uploaded
 //     if (req.files && 'image' in req.files && req.files.image[0]) {
 //         profile = `/images/${req.files.image[0].filename}`;
 //     }
 
-//     // Create data object for updating the profile
+//     // Extract the raw data from req.body
+//     const rawData = req.body.data; // Assuming req.body.data contains the stringified data object
+//     let parsedData = JSON.parse(rawData);
 //     const data = {
 //         profile,
-//         ...req.body,
+//         parsedData, // Spread the parsed data into the data object
 //     };
-
-//     // Log for debugging (remove in production)
-
-//     // Update the profile in the database
 //     const result = await UserService.updateProfileToDB(user, data);
 
 //     // Send the response back
@@ -98,32 +127,7 @@ const getAllUsers = catchAsync(async (req: Request, res: Response) => {
 //     });
 // });
 
-const updateProfile = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    const user = req.user; // The user object should contain user information
-    let profile;
 
-    // Check if a new profile image is being uploaded
-    if (req.files && 'image' in req.files && req.files.image[0]) {
-        profile = `/images/${req.files.image[0].filename}`;
-    }
-
-    // Extract the raw data from req.body
-    const rawData = req.body.data; // Assuming req.body.data contains the stringified data object
-    let parsedData = {};
-    const data = {
-        profile,
-        rawData, // Spread the parsed data into the data object
-    };
-    const result = await UserService.updateProfileToDB(user, data);
-
-    // Send the response back
-    sendResponse(res, {
-        success: true,
-        statusCode: StatusCodes.OK,
-        message: 'Profile updated successfully',
-        data: result,
-    });
-});
 
 
 const updateUser = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
