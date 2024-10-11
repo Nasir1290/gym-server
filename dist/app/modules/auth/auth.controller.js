@@ -30,6 +30,9 @@ const sendResponse_1 = __importDefault(require("../../../shared/sendResponse"));
 const auth_service_1 = require("./auth.service");
 const config_1 = __importDefault(require("../../../config"));
 const loginUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(req.method);
+    console.log("login requestcome from");
+    console.log(req.url);
     const loginData = __rest(req.body, []);
     const { accessToken, refreshToken } = yield auth_service_1.AuthService.loginUserFromDB(loginData);
     res.cookie('refreshToken', refreshToken, {

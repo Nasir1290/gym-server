@@ -33,7 +33,7 @@ function main() {
             logger_1.logger.info(colors_1.default.green('🚀 Database connected successfully'));
             (0, DB_1.default)();
             const port = typeof config_1.default.port === 'number' ? config_1.default.port : Number(config_1.default.port);
-            server = app_1.default.listen(port, config_1.default.ip_address, () => {
+            server = app_1.default.listen(port, () => {
                 logger_1.logger.info(colors_1.default.yellow(`♻️  Application listening on port:${config_1.default.port}`));
             });
             //socket
