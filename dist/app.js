@@ -17,7 +17,7 @@ app.use(morgen_1.Morgan.errorHandler);
 //body parser
 app.use((0, cors_1.default)({
     credentials: true,
-    origin: 'http://localhost:3000', // or use an array if you have multiple allowed origins
+    origin: 'https://gym-management-ecru.vercel.app', // or use an array if you have multiple allowed origins
 }));
 app.use(express_1.default.json());
 app.use((0, cookie_parser_1.default)());
