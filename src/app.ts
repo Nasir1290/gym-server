@@ -15,7 +15,7 @@ app.use(Morgan.errorHandler);
 app.use(
     cors({
         credentials: true,
-        origin: 'https://localhost:3000', // or use an array if you have multiple allowed origins
+        origin: 'http://localhost:3000', // or use an array if you have multiple allowed origins
     }),
 );
 app.use(express.json());

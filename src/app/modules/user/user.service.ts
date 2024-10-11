@@ -57,7 +57,7 @@ const getUserByIdFromDB = async (id: string) => {
 };
 
 
-const updateProfileToDB = async (user: JwtPayload, payload: Partial<IUser>): Promise<Partial<IUser | null>> => {
+const updateProfileToDB = async (user: JwtPayload, payload: any): Promise<Partial<IUser | null>> => {
     const { id } = user;
     // console.log(typeof payload.profile)
 
@@ -87,7 +87,7 @@ const updateProfileToDB = async (user: JwtPayload, payload: Partial<IUser>): Pro
 
 
 
-const updateUserToDB = async (payload: Partial<IUser>): Promise<Partial<IUser | null>> => {
+const updateUserToDB = async (payload: any): Promise<Partial<IUser | null>> => {
     console.log(payload);
     const { id } = payload.rawData;
 
