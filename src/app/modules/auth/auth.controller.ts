@@ -9,6 +9,9 @@ import config from '../../../config';
 
 
 const loginUser = catchAsync(async (req: Request, res: Response) => {
+  console.log(req.method)
+  console.log("login requestcome from")
+  console.log(req.url)
   const { ...loginData } = req.body;
   const { accessToken, refreshToken } =
     await AuthService.loginUserFromDB(loginData);
