@@ -1,6 +1,20 @@
-# Project Name
 
-This is a template project for backend development using Typescript, Node.js, Express, Mongoose, Bcrypt, JWT, NodeMailer, Multer, ESLint, and Prettier. The aim is to reduce setup time for new backend projects.
+# Project Title: Gym Management System
+## Live Demo
+You can access the live version of the project here: [Live Link](https://gym-management-ecru.vercel.app/)
+
+## Entity-Relationship (ER) Diagram
+
+Here is the ER diagram of the project to help visualize the database structure.
+
+![ER Diagram](./uploads/images/er-diagram.png)
+
+## Installation and Setup
+
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/Nasir1290/gym-server.git
+    ```
 
 ## Features
 
@@ -112,3 +126,7 @@ Explain how to run the automated tests for this system.
 ```bash
 npm test
 ```
+---
+
+Made with ❤️ by [Nasir Mollah](https://nasirmollah.vercel.app)
+
