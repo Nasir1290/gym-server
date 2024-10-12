@@ -23,12 +23,18 @@ In the root directory of the project, create a `.env` file and add the following
 
 ```env
 # Basic
+NODE_ENV=production
+DATABASE_URL=mongodb+srv://gym:gym@mydatabase.nhior4u.mongodb.net/gym?retryWrites=true&w=majority&appName=MyDataBase
+IP_ADDRESS=192.168.1.113
+PORT=4000
+BCRYPT_SALT_ROUNDS=12
 JWT_ACCESS_TOKEN_SECRET=jwt_secret
 JWT_REFRESH_TOKEN_SECRET=jwt_secret_refresh_token
 JWT_SECRET=jwt_secret
 JWT_ACCESS_TOKEN_EXPIRED_IN=7d
 JWT_REFRESH_TOKEN_EXPIRED_IN = 30d
 JWT_RESET_TOKEN_EXPIRED_IN = 1h
+
 ```
 
 ## Features
